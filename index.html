@@ -83,7 +83,6 @@
             background: #1e293b;
         }
 
-        /* النوافذ المنبثقة (Modals) */
         .modal {
             display: none;
             position: fixed;
@@ -145,7 +144,7 @@
             font-size: 0.95rem;
         }
 
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
             padding: 10px;
             background: #1e293b;
@@ -179,7 +178,7 @@
 
     <div class="container">
         <h1>AM Launcher</h1>
-        <p>مشغل الألعاب الأسرع، حمل نسختك أو قم بإدارة حسابك والسكينات بكل سهولة.</p>
+        <p>مشغل الألعاب الأسرع، حمل نسختك أو قم بإدارة حسابك والسكينات بكل سلاسة.</p>
         
         <div class="btn-group">
             <button class="main-btn" onclick="openModal('downloadModal')">تحميل اللانشر</button>
@@ -258,7 +257,7 @@
                 alert('الرجاء كتابة اسم المستخدم أولاً!');
                 return;
             }
-            alert('تم حفظ اسم المستخدم (' + username + ') بنجاح! (في الخطوة القادمة سنربطه بقاعدة البيانات واللانشر).');
+            alert('تم حفظ اسم المستخدم (' + username + ') بنجاح!');
             closeModal('profileModal');
         }
     </script>
