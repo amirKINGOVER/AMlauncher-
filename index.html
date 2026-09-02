@@ -149,12 +149,12 @@
         <div class="modal-content">
             <h3>اختر نسخة اللانشر المناسبة لك</h3>
             
-            <div class="version-card" onclick="downloadVersion('AMlauncher1.2.exe')">
+            <div class="version-card" onclick="downloadVersion('1.2')">
                 <h4>AM Launcher 1.2 (النسخة الحديثة)</h4>
                 <p>النسخة المطورة والمتقدمة مع أفضل أداء وتصميم حديث.</p>
             </div>
 
-            <div class="version-card" onclick="downloadVersion('AMlauncher1.0.exe')">
+            <div class="version-card" onclick="downloadVersion('1.0')">
                 <h4>AM Launcher 1.0 (النسخة الخفيفة)</h4>
                 <p>نسخة خفيفة جداً ومصممة خصيصاً لتناسب الأجهزة الضعيفة بسلاسة.</p>
             </div>
@@ -174,12 +174,14 @@
             modal.style.display = 'none';
         }
 
-        function downloadVersion(fileName) {
-            // استبدل (GitHub_Username) باسم حسابك و (Repository_Name) باسم مستودعك
-            const baseURL = "https://raw.githubusercontent.com/GitHub_Username/Repository_Name/main/";
+        function downloadVersion(versionType) {
+            const baseURL = "https://raw.githubusercontent.com/amirKINGOVER/AMlauncher-/main/";
             
-            // بدء التحميل المباشر للملف
-            window.location.href = baseURL + fileName;
+            if (versionType === '1.2') {
+                window.location.href = baseURL + 'AMlauncher.1.2.rar';
+            } else {
+                window.location.href = baseURL + 'AMlauncher1.0.zip';
+            }
             
             closeModal();
         }
