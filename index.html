@@ -261,7 +261,6 @@
         <div class="modal-content">
             <h3>تسجيل الدخول إلى حسابك</h3>
             
-            <!-- أزرار تسجيل الدخول السريع -->
             <div class="login-buttons">
                 <button class="social-btn discord-btn" onclick="loginSocial('Discord')">
                     تسجيل الدخول بواسطة Discord
@@ -316,7 +315,7 @@
         }
 
         function loginSocial(provider) {
-            alert('تم النقر على تسجيل الدخول عبر ' + provider + '\n(ملاحظة: لكي يعمل تسجيل الدخول حقيقياً عبر هذه المنصات، ستحتاج لربط الموقع بخدمة مصادقة سحابية مثل Firebase أو Auth0 لاحقاً).');
+            alert('تم النقر على تسجيل الدخول عبر ' + provider);
         }
 
         function saveProfile() {
