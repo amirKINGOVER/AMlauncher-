@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحميل AM Launcher</title>
+    <title>AM Launcher - الموقع الرسمي</title>
     <style>
         * {
             margin: 0;
@@ -18,8 +18,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
         }
 
         .container {
@@ -29,8 +30,8 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            max-width: 500px;
-            width: 90%;
+            max-width: 600px;
+            width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -42,16 +43,24 @@
 
         p {
             color: #94a3b8;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-size: 1.1rem;
         }
 
-        .download-btn {
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .main-btn {
             background: linear-gradient(135deg, #0284c7, #2563eb);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            padding: 12px 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
@@ -59,11 +68,22 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         }
 
-        .download-btn:hover {
+        .main-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
         }
 
+        .secondary-btn {
+            background: #334155;
+            color: #38bdf8;
+            border: 1px solid #475569;
+        }
+
+        .secondary-btn:hover {
+            background: #1e293b;
+        }
+
+        /* النوافذ المنبثقة (Modals) */
         .modal {
             display: none;
             position: fixed;
@@ -94,14 +114,17 @@
             color: #f8fafc;
         }
 
-        .version-card {
+        .version-card, .form-group {
             background: #0f172a;
             padding: 15px;
             margin: 10px 0;
             border-radius: 8px;
-            cursor: pointer;
             border: 1px solid #334155;
             text-align: right;
+        }
+
+        .version-card {
+            cursor: pointer;
             transition: 0.2s;
         }
 
@@ -115,10 +138,25 @@
             margin-bottom: 5px;
         }
 
-        .version-card p {
-            font-size: 0.9rem;
-            margin: 0;
-            color: #94a3b8;
+        .form-group label {
+            display: block;
+            color: #38bdf8;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #1e293b;
+            border: 1px solid #475569;
+            color: white;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #38bdf8;
         }
 
         .close-btn {
@@ -141,10 +179,15 @@
 
     <div class="container">
         <h1>AM Launcher</h1>
-        <p>مشغل الألعاب الأسرع والأفضل، اختر نسختك المفضلة وابدأ اللعب الآن.</p>
-        <button class="download-btn" onclick="openModal()">تحميل الآن</button>
+        <p>مشغل الألعاب الأسرع، حمل نسختك أو قم بإدارة حسابك والسكينات بكل سهولة.</p>
+        
+        <div class="btn-group">
+            <button class="main-btn" onclick="openModal('downloadModal')">تحميل اللانشر</button>
+            <button class="main-btn secondary-btn" onclick="openModal('profileModal')">إدارة الحساب والسكين</button>
+        </div>
     </div>
 
+    <!-- نافذة التحميل -->
     <div id="downloadModal" class="modal">
         <div class="modal-content">
             <h3>اختر نسخة اللانشر المناسبة لك</h3>
@@ -159,19 +202,42 @@
                 <p>نسخة خفيفة جداً ومصممة خصيصاً لتناسب الأجهزة الضعيفة بسلاسة.</p>
             </div>
 
-            <button class="close-btn" onclick="closeModal()">إلغاء</button>
+            <button class="close-btn" onclick="closeModal('downloadModal')">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- نافذة إدارة الحساب والسكين -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <h3>تعديل ملف اللعبة والسكين</h3>
+            
+            <div class="form-group">
+                <label>اسم المستخدم في اللعبة (In-Game Username):</label>
+                <input type="text" id="gameUsername" placeholder="مثال: AmirKingOver">
+            </div>
+
+            <div class="form-group">
+                <label>اختر ملف السكين (Skin - PNG):</label>
+                <input type="file" id="skinFile" accept="image/png">
+            </div>
+
+            <div class="form-group">
+                <label>اختر ملف العباءة (Cape - PNG):</label>
+                <input type="file" id="capeFile" accept="image/png">
+            </div>
+
+            <button class="main-btn" style="width: 100%; margin-top: 10px;" onclick="saveProfile()">حفظ التغييرات</button>
+            <button class="close-btn" onclick="closeModal('profileModal')">إغلاق</button>
         </div>
     </div>
 
     <script>
-        const modal = document.getElementById('downloadModal');
-
-        function openModal() {
-            modal.style.display = 'flex';
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
         }
 
-        function closeModal() {
-            modal.style.display = 'none';
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         function downloadVersion(versionType) {
@@ -183,7 +249,17 @@
                 window.location.href = baseURL + 'AMlauncher1.0.zip';
             }
             
-            closeModal();
+            closeModal('downloadModal');
+        }
+
+        function saveProfile() {
+            const username = document.getElementById('gameUsername').value;
+            if(!username) {
+                alert('الرجاء كتابة اسم المستخدم أولاً!');
+                return;
+            }
+            alert('تم حفظ اسم المستخدم (' + username + ') بنجاح! (في الخطوة القادمة سنربطه بقاعدة البيانات واللانشر).');
+            closeModal('profileModal');
         }
     </script>
 
